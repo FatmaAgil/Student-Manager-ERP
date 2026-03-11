@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "D:/odoo/server",
+        "D:/odoo/server/odoo"
+    ]
+}

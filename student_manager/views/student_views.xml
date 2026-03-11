@@ -1,0 +1,81 @@
+<odoo>
+
+    <!-- STUDENT LIST VIEW -->
+    <record id="view_student_tree" model="ir.ui.view">
+        <field name="name">student.student.tree</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="age" />
+                <field name="email" />
+                <field name="total_courses" />
+                <field name="average_grade" />
+            </list>
+        </field>
+    </record>
+
+    <!-- STUDENT FORM VIEW -->
+    <record id="view_student_form" model="ir.ui.view">
+        <field name="name">student.student.form</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+
+            <form string="Student">
+                <sheet>
+
+                    <!-- BASIC INFO -->
+                    <group>
+                        <field name="name" />
+                        <field name="age" />
+                        <field name="email" />
+                    </group>
+
+                    <!-- COMPUTED FIELDS -->
+                    <group>
+                        <field name="total_courses" readonly="1" />
+                        <field name="average_grade" readonly="1" />
+                    </group>
+
+                    <notebook>
+
+                        <page string="Enrollments">
+
+                            <field name="enrollment_ids">
+
+                                <list editable="bottom">
+                                    <field name="course_id" />
+                                    <field name="grade" />
+                                    <field name="date" />
+                                </list>
+
+                            </field>
+
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="action_student" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">student.student</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- MENU -->
+    <menuitem id="menu_student_root" name="Student Manager" />
+
+    <menuitem
+        id="menu_student"
+        name="Students"
+        parent="menu_student_root"
+        action="action_student"
+    />
+
+</odoo>
