@@ -1,4 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_student_student,student.student,model_student_student,,1,1,1,1
-access_student_course,student.course,model_student_course,,1,1,1,1
-access_student_enrollment,student.enrollment,model_student_enrollment,,1,1,1,1
+access_student_manager,student.manager,model_student_student,student_manager.group_student_manager,1,1,1,1
+access_student_officer,student.officer,model_student_student,student_manager.group_student_officer,1,1,1,0
+access_course_manager,course.manager,model_student_course,student_manager.group_student_manager,1,1,1,1
+access_course_officer,course.officer,model_student_course,student_manager.group_student_officer,1,1,1,0
+access_enrollment_manager,enrollment.manager,model_student_enrollment,student_manager.group_student_manager,1,1,1,1
+access_enrollment_officer,enrollment.officer,model_student_enrollment,student_manager.group_student_officer,1,1,1,0

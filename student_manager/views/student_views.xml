@@ -1,6 +1,8 @@
 <odoo>
 
+    <!-- ===================== -->
     <!-- STUDENT LIST VIEW -->
+    <!-- ===================== -->
     <record id="view_student_tree" model="ir.ui.view">
         <field name="name">student.student.tree</field>
         <field name="model">student.student</field>
@@ -15,14 +17,31 @@
         </field>
     </record>
 
+
+    <!-- ===================== -->
     <!-- STUDENT FORM VIEW -->
+    <!-- ===================== -->
     <record id="view_student_form" model="ir.ui.view">
         <field name="name">student.student.form</field>
         <field name="model">student.student</field>
         <field name="arch" type="xml">
 
             <form string="Student">
+
                 <sheet>
+
+                    <!-- SMART BUTTON -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_enrollments"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-book">
+
+                            <field name="total_courses"
+                                widget="statinfo"
+                                string="Courses" />
+                        </button>
+                    </div>
 
                     <!-- BASIC INFO -->
                     <group>
@@ -31,45 +50,105 @@
                         <field name="email" />
                     </group>
 
-                    <!-- COMPUTED FIELDS -->
-                    <group>
+                    <!-- STATISTICS -->
+                    <group string="Statistics">
                         <field name="total_courses" readonly="1" />
                         <field name="average_grade" readonly="1" />
                     </group>
 
+                    <!-- NOTEBOOK -->
                     <notebook>
 
+                        <!-- ENROLLMENTS TAB -->
                         <page string="Enrollments">
-
                             <field name="enrollment_ids">
-
                                 <list editable="bottom">
                                     <field name="course_id" />
                                     <field name="grade" />
                                     <field name="date" />
                                 </list>
-
                             </field>
-
                         </page>
 
                     </notebook>
 
                 </sheet>
+
             </form>
 
         </field>
     </record>
 
+
+    <!-- ===================== -->
+    <!-- SEARCH VIEW (DAY 6) -->
+    <!-- ===================== -->
+    <record id="view_student_search" model="ir.ui.view">
+        <field name="name">student.student.search</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+
+            <search>
+
+                <!-- SEARCH FIELDS -->
+                <field name="name" />
+                <field name="email" />
+
+                <!-- FILTERS -->
+                <filter
+                    name="students_with_courses"
+                    string="With Courses"
+                    domain="[('total_courses','>',0)]"
+                />
+
+                <filter
+                    name="top_students"
+                    string="Top Students"
+                    domain="[('average_grade','>',70)]"
+                />
+
+                <!-- GROUP BY -->
+                <group expand="0" string="Group By">
+
+                    <filter
+                        name="group_age"
+                        string="Age"
+                        context="{'group_by':'age'}"
+                    />
+
+                    <filter
+                        name="group_courses"
+                        string="Courses"
+                        context="{'group_by':'total_courses'}"
+                    />
+
+                </group>
+
+            </search>
+
+        </field>
+    </record>
+
+
+    <!-- ===================== -->
     <!-- ACTION -->
+    <!-- ===================== -->
     <record id="action_student" model="ir.actions.act_window">
         <field name="name">Students</field>
         <field name="res_model">student.student</field>
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- MENU -->
-    <menuitem id="menu_student_root" name="Student Manager" />
+
+    <!-- ===================== -->
+    <!-- MENU (FIXED) -->
+    <!-- ===================== -->
+    <menuitem
+        id="menu_student_root"
+        name="Student Manager"
+        action="action_student"
+        sequence="10"
+    />
 
     <menuitem
         id="menu_student"

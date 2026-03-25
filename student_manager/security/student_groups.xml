@@ -1,0 +1,15 @@
+<odoo>
+
+    <!-- STUDENT MANAGER GROUP -->
+    <record id="group_student_manager" model="res.groups">
+        <field name="name">Student Manager</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+
+    <!-- STUDENT OFFICER GROUP -->
+    <record id="group_student_officer" model="res.groups">
+        <field name="name">Student Officer</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+
+</odoo>
