@@ -60,6 +60,7 @@ class Student(models.Model):
     # SMART BUTTON ACTION
 
     def action_view_enrollments(self):
+        self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
             'name': 'Enrollments',
