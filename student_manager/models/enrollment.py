@@ -3,7 +3,8 @@ from odoo import models, fields, api
 class Enrollment(models.Model):
     _name = 'student.enrollment'
     _description = 'Enrollment'
-
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    
     student_id = fields.Many2one('student.student', string="Student")
     course_id = fields.Many2one('student.course', string="Course")
     date = fields.Date(string="Enrollment Date")
@@ -26,5 +27,7 @@ class Enrollment(models.Model):
         record = super().create(vals)
 
         print("✅ Enrollment created for student:", record.student_id.name)
+        message = f"📘 Student {record.student_id.name} enrolled in {record.course_id.name}"
 
+        record.message_post(body=message)
         return record

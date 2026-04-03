@@ -4,7 +4,7 @@
     'summary': 'Simple Student Management App',
     'author': 'Fatma',
     'category': 'Education',
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
     'data': [
     'security/student_groups.xml',
     'security/ir.model.access.csv',
