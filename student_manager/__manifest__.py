@@ -11,6 +11,7 @@
     'views/student_views.xml',
     'views/course_views.xml',
     'views/enrollment_views.xml',
+    'data/cron.xml',
     ],
     'installable': True,
     'application': True,

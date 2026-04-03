@@ -1,6 +1,8 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
+import logging
+_logger = logging.getLogger(__name__)
 
 class Student(models.Model):
     _name = 'student.student'
@@ -69,3 +71,11 @@ class Student(models.Model):
             'domain': [('student_id', '=', self.id)],
             'context': {'default_student_id': self.id},
         }
+    
+    @api.model
+    def check_students_without_enrollments(self):
+        students = self.search([])
+
+        for student in students:
+            if not student.enrollment_ids:
+                _logger.info(f"⚠️ Student without enrollment: {student.name}")
