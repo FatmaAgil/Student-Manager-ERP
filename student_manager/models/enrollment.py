@@ -10,11 +10,7 @@ class Enrollment(models.Model):
     grade = fields.Float(string="Grade")
 
     status = fields.Selection(
-        [
-            ('passed', 'Passed'),
-            ('failed', 'Failed')
-        ],
-        string="Status",
+        [('passed', 'Passed'), ('failed', 'Failed')],
         compute="_compute_status",
         store=True
     )
@@ -22,7 +18,13 @@ class Enrollment(models.Model):
     @api.depends('grade')
     def _compute_status(self):
         for record in self:
-            if record.grade >= 50:
-                record.status = 'passed'
-            else:
-                record.status = 'failed'
+            record.status = 'passed' if record.grade >= 50 else 'failed'
+
+    # 🔥 AUTOMATION
+    @api.model
+    def create(self, vals):
+        record = super().create(vals)
+
+        print("✅ Enrollment created for student:", record.student_id.name)
+
+        return record
