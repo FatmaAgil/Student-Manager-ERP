@@ -8,10 +8,15 @@
     'data': [
     'security/student_groups.xml',
     'security/ir.model.access.csv',
+    'reports/student_report_template.xml',
+    'reports/student_report.xml',
     'views/student_views.xml',
     'views/course_views.xml',
     'views/enrollment_views.xml',
     'data/cron.xml',
+   
+    
+
     ],
     'installable': True,
     'application': True,

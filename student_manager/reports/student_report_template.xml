@@ -1,0 +1,57 @@
+<odoo>
+    <template id="student_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Student Report</h2>
+
+                        <p>
+                            <strong>Name:</strong>
+                            <span t-esc="doc.name" />
+                        </p>
+                        <p>
+                            <strong>Email:</strong>
+                            <span t-esc="doc.email" />
+                        </p>
+                        <p>
+                            <strong>Age:</strong>
+                            <span t-esc="doc.age" />
+                        </p>
+
+                        <h3>Enrollments</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Grade</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.enrollment_ids" t-as="enroll">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="enroll.course_id.name" />
+                                        </td>
+                                        <td>
+                                            <span t-esc="enroll.grade" />
+                                        </td>
+                                        <td>
+                                            <span t-esc="enroll.date" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <p>
+                            <strong>Average Grade:</strong>
+                            <span t-esc="doc.average_grade" />
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
